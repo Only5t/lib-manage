@@ -1,0 +1,40 @@
+server:
+  port: 8101
+  error:
+    path: /error
+spring:
+  application:
+    name: library-manage
+  datasource:
+    url: jdbc:mysql://192.168.4.43:3306/test?serverTimezone=GMT%2B8&useSSL=false&characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    database: 9
+    host: 192.168.4.59
+    password: 12345678
+    jedis:
+      pool:
+        max-active: 10
+        max-wait: -1
+        max-idle: 5
+        min-idle: 0
+    timeout: 6000
+
+##jwt配置
+audience:
+  clientId: 098f6bcd4621d373cade4e832627b4f6  # 代表这个JWT的接收对象,存入audience
+  base64Secret: MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=  # 密钥, 经过Base64加密, 可自行替换
+  name: restapiuser   # JWT的签发主体，存入issuer
+  expiredSecond: 6000000   # 过期时间，时间戳
+
+
+mybatis:
+  mapper-locations:
+    - classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml

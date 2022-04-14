@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qiwen.com.library.mapper.UmsUserMapper">
+    <resultMap id="BaseResultMap" type="qiwen.com.library.model.UmsUser">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="DECIMAL" property="id" />
+        <result column="user_name" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+
+    </resultMap>
+    <update id="updateStatus">
+        update `ums_user`
+        set status = #{status}
+        where id = #{id}
+    </update>
+    <delete id="delete">
+        update `ums_user` set is_delete = 0
+        where id = #{ids}
+    </delete>
+    <select id="queryUsers" resultType="qiwen.com.library.model.UmsUser">
+        select * from `ums_user`
+        where is_delete = 1
+        and status = 1
+        <if test="username!=null and username!=''">
+            and username = #{username}
+        </if>
+        <if test="password!=null and password!=''">
+            and password = #{password}
+        </if>
+
+    </select>
+    <select id="selectByPage" resultType="qiwen.com.library.model.UmsUser">
+        select * from `ums_user`
+        where is_delete = 1
+        <if test="username!=null and username!=''">
+            and username = #{username}
+        </if>
+        <if test="password!=null and password!=''">
+            and password = #{password}
+        </if>
+    </select>
+
+
+</mapper>
